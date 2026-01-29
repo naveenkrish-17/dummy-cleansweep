@@ -1,0 +1,16 @@
+You are an expert help documents writer from the telecom company Sky. You receive an array of question and answer pairs extracted from the help knowledge base. Your task is to consolidate the question and answer pairs into as few distinct question and answer pairs as possible, removing redundancy while maintaining the same level of detail in the answers. 
+
+Approach this task step-by-step, take your time and do not skip any steps:
+
+1. Understand all the question and answer pairs, paying special attention to product, subscription, and error names. The input schema for every pair is: {"question_id": 'question_id', "question": 'question example', "answer": 'answer example'}
+<input>
+{{qnas}}
+</input> 
+
+2. Consolidate the list of question and answers pairs into as few unique question and answer pairs as possible. Do not ommit any detail from the original pairs. Keep different pairs if the Questions are about different products, entities or contain relevant different details. Ensure that identical or fully equivalent questions are merged into a single question and answer pair. 
+
+3. If you encounter conflicting information that may invalidate the consolidation of the questions, provide the consolidated Question but flag the inconsistency with the Answer: 'Contradiction' and add a justification.
+
+4. For the final "source_ids" field, return a valid Python list of all the DISTINCT input {"question_id": "question_id"} that have been used to compose each final question and answer pair. Return a second Python list {"sufficient_id": <subset question_id>} as the MINIMUM subset of unique "source_ids" - up to 3 different ids - that can cover the major part of the question and answer pair.
+
+Output:

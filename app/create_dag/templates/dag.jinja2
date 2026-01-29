@@ -1,0 +1,133 @@
+"""CleanSweep DAG.
+
+{{ description }}
+"""
+
+from __future__ import annotations
+
+import os
+from datetime import datetime, timedelta
+from hashlib import sha1
+
+from airflow.models import BaseOperator
+from airflow.models.dag import DAG
+from airflow.operators.python import ShortCircuitOperator
+from airflow.providers.google.cloud.operators.cloud_run import (
+    CloudRunExecuteJobOperator,
+)
+from airflow.utils.decorators import apply_defaults
+from google.cloud.storage import Client
+
+def check_file_exists(bucket_name: str, match_glob: str):
+    """Check if any file exists in a specified Google Cloud Storage bucket that matches a given glob pattern.
+
+    Args:
+        bucket_name (str): The name of the Google Cloud Storage bucket.
+        match_glob (str): The glob pattern to match files against.
+
+    Returns:
+        bool: True if any file matching the glob pattern exists in the bucket, False otherwise.
+
+    """
+    client = Client()
+    bucket = client.get_bucket(bucket_name)
+    blobs = bucket.list_blobs(match_glob=match_glob)
+    return any(blobs)
+
+def get_run_id(run_id: str, dag_id: str | None = None) -> str:
+    """Generate a unique 7-character run ID based on the SHA-1 hash of the input string.
+
+    Args:
+        run_id (str): The run identifier.
+        dag_id (str | None): The DAG identifier. If provided, it will be appended to the run_id.
+            If not provided, only the run_id will be used.
+
+    Returns:
+        str: A 7-character hexadecimal string derived from the SHA-1 hash of the input.
+    """
+
+    value = run_id
+    if dag_id:
+        value = f"{run_id}-{dag_id}"
+
+    return sha1(value.encode("utf-8")).hexdigest()[:7]
+
+
+class RunIdOperator(BaseOperator):
+    """RunIdOperator is a custom Airflow operator that logs a specified `run_id` during task execution.
+
+    Attributes:
+        template_fields (tuple): A tuple containing the names of attributes that should be templated by Airflow.
+
+        run_id (str): The run identifier to be logged during task execution.
+        **kwargs: Additional keyword arguments passed to the BaseOperator.
+    """
+
+    template_fields = ("run_id",)
+
+    @apply_defaults
+    def __init__(
+        self,
+        *,
+        run_id: str,
+        **kwargs,
+    ):
+        super().__init__(**kwargs)
+        self.run_id = run_id
+
+    def execute(self, context):
+        """Execute the main logic of the task instance.
+
+        Args:
+            context (dict): The execution context provided by Airflow, containing
+                            runtime information such as task instance (ti).
+
+        Logs:
+            Logs the `run_id` if the task instance (ti) is available in the context.
+        """
+        ti = context.get("ti")
+        if ti is not None:
+            ti.log.info(f"run_id: {self.run_id}")
+
+
+PROJECT_ID = os.environ.get("GOOGLE_CLOUD_PROJECT")
+if PROJECT_ID is None:
+    raise ValueError("GOOGLE_CLOUD_PROJECT environment variable was not set.")
+REGION = "{{ region }}"
+JOB_NAME = "{{ job_name }}"
+
+with DAG(
+    "{{ name }}",
+    description="{{ description }}",
+    tags={{ tags }},
+    default_args={
+        "deferrable": False,
+        "owner": "{{ owner }}",
+        "email": "{{ email }}",
+        "depends_on_past": False,
+        "email_on_failure": False,
+        "email_on_retry": False,
+        "retries": 0,
+        "retry_delay": timedelta(minutes=1),
+    },
+    max_active_runs=1,
+    default_view="graph",
+    owner_links={{ owner_links }},
+    schedule_interval={{ schedule_interval }},
+    catchup=False,
+    start_date={{ start_date }},
+    user_defined_macros={'get_run_id': get_run_id},
+) as dag:
+
+    log_run_id = RunIdOperator(
+        task_id="log_run_id",
+        {% raw %}
+        run_id="{{ get_run_id(dag_run.run_id, dag_run.dag_id) }}",
+        {% endraw %}
+        dag=dag,
+    )
+
+
+    {{ tasks }}
+
+    {{ dependencies }}

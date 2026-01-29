@@ -1,0 +1,60 @@
+{
+  "type": "article",
+  "id": "blt1f5620909de6cd18",
+  "attributes": {
+    "_in_progress": false,
+    "article_preview": "",
+    "banner": {
+      "banner_image": null
+    },
+    "contact_tree": [],
+    "display_title": "Sky Mobile tariff guide",
+    "key_info_content": [],
+    "linked_articles": {
+      "linked_article_segment": []
+    },
+    "metadata": {
+      "meta_title": "Sky Mobile tariff guide",
+      "description": "In this guide you'll find detailed pricing information for Sky Mobile usage both within and outside of your plan, including data, calls and texts, in the UK and while roaming.",
+      "regions": ["UK"],
+      "link_to_uk_roi_article": [],
+      "product_types": [],
+      "linked_article": [],
+      "flow_start_article": [],
+      "keywords": "sky mobile, tariff, terms and and conditions",
+      "indexed": false,
+      "prevent_link_following": false,
+      "promote_search": false,
+      "nosnippet": false,
+      "redirect": {
+        "should_redirect": false,
+        "redirect_url": "",
+        "permanent": false
+      }
+    },
+    "modular_blocks": {
+      "rich_text": {
+        "title": "Main content",
+        "user_groups": [],
+        "user_group_icon_override": [],
+        "mark_as_key_info_box": false,
+        "content_blocks": {
+          "title": "Plan, Add Ons, Usage Charges and Specialised Numbers",
+          "content_left": "Plan, Add Ons, Usage Charges and Specialised Numbers\n----------------------------------------------------\n\nIn the guide below you'll find detailed pricing information for Sky Mobile usage both within and outside of your plan, including data, calls and texts, in the UK and while roaming.\n\n[Sky Mobile Tariff Guide - 9 January 24 (Adobe PDF)][1]\n\n\n  \n\n\n \n\n\n  \n\n\n \n\n\n  [1]: https://static.skyassets.com/contentstack/assets/blt7f2b03fd02c7fe60/bltcc9576c8018ec983/659ecb6cecc34e125d10b5cd/download?disposition=inline"
+        }
+      }
+    },
+    "parent_flow": [],
+    "sales_offers": {
+      "show_sales_offers": false
+    },
+    "slug": "sky-mobile-tariff-guide",
+    "tags": ["sky mobile", "terms and conditions", "tariffs"],
+    "title": "Sky Mobile Tariff Guide [terms and conditions]",
+    "topics": [],
+    "updated_at": "2024-01-10T16:58:05.639Z",
+    "user_group_icon_override": [],
+    "user_groups": [],
+    "videos": []
+  }
+}

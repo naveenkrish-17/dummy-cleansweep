@@ -1,0 +1,27 @@
+{
+  "id": "$.id",
+  "name": "$.attributes.title",
+  "content": [
+    {
+      "title": "$.attributes.modular_blocks.rich_text.content_blocks.title",
+      "data": "$.attributes.modular_blocks.rich_text.content_blocks.content_left",
+      "metadata": {
+        "access_groups": "$.attributes.modular_blocks.rich_text.user_groups"
+      }
+    }
+  ],
+  "metadata": {
+    "modified": "$.attributes.updated_at",
+    "description": "$.attributes.metadata.description",
+    "access_groups": "$.attributes.user_groups",
+    "tags": "$.attributes.tags",
+    "region": "$.attributes.metadata.regions",
+    "slug": "$.attributes.slug",
+    "should_redirect": "$.attributes.metadata.redirect.should_redirect",
+    "redirect_url": "$.attributes.metadata.redirect.redirect_url",
+    "permanent": "$.attributes.metadata.redirect.permanent",
+    "keywords": "$.attributes.metadata.keywords",
+    "root_document_id": "$.attributes.metadata.flow_start_article",
+    "display_title": "$.attributes.display_title"
+  }
+}

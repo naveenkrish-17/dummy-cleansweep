@@ -1,0 +1,49 @@
+{
+  "name": "simple",
+  "description": "Simple test",
+  "config": "simple.yml",
+  "data": "simple.ndjson",
+  "platform": "kosmo",
+  "steps": [
+    {
+      "name": "step1",
+      "description": "Test the transform step",
+      "command": "transform",
+      "check_file": true,
+      "target_dir": "curated",
+      "target_extension": "avro"
+    },
+    {
+      "name": "step2",
+      "description": "Test the clean step",
+      "command": "clean",
+      "check_file": true,
+      "target_dir": "cleaned",
+      "target_extension": "avro"
+    },
+    {
+      "name": "step3",
+      "description": "Test the chunk step",
+      "command": "chunk",
+      "check_file": true,
+      "target_dir": "chunked",
+      "target_extension": "avro"
+    },
+    {
+      "name": "step4",
+      "description": "Test the metadata step",
+      "command": "metadata",
+      "check_file": true,
+      "target_dir": "metadata",
+      "target_extension": "avro"
+    },
+    {
+      "name": "step5",
+      "description": "Test the embed step",
+      "command": "embed",
+      "check_file": true,
+      "target_dir": "embedded",
+      "target_extension": "parquet"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+The task is to evaluate if the <answer> for a <question> (id: {{id}}) is based exclusively on help <document>. The context is technology and media. A perfect <answer> only uses the information stated in the <documents>, adding only minor details and containing no new information. Follow the steps below:
+
+1. Read the documents carefully, taking note of all facts and statements within.
+<document>
+{{document}}
+</document>
+
+2. Read and fully understand the customer question. Indetify if the answer addresses the question, but do not judge its completeness.
+<question>
+{{question}}
+</question>
+
+3. Read the proposed answer:
+<answer>
+{{answer}}
+</answer>
+
+4. Read and understand all of the three ratings carefully. There is only one correct rating. The ratings are increasingly more specific and are ordered:
+
+- `intrinsic`: The <answer> contradicts or disagrees with the some of the facts stated in the <document>. For example it contains a  statement which disagrees with the contents of the <document> provided. If the <answer> contains only one disagreement or contradiction, it is still rated `intrinsic`.
+- `extrinsic`: Some or all of the information of the <answer> are part of the <document>. For instance, the <answer> contains substantial and important new additional facts or statements which are not contained explicitly in the <document>. 
+- `consistent`: To be rated `consistent` all facts of the <answer> have to be stated explicitly in the <document>. The <answer> is also consistent if it is structured differently or adds only minor, common knowledge details as long as the important information is unchanged. Note: an <answer> is ONLY `consistent` if it does not contradicts the <document> in any way and does not add substantial new information compared to the <document>. If the rating could be `intrinsic` or `extrinsic` it cannot be `consistent`.
+
+5. Assign the correct rating to the <answer>. Carefully consider which is the most fitting rating and generate a detailed and well reasoned justification why this rating should be assigned to the <answer>. Consider both arguments for and against the rating. Then review the final rating based on the justification. Give specific examples from the <document>. Write 100 to 150 words.
+
+Output:

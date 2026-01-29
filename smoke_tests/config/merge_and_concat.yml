@@ -1,0 +1,25 @@
+---
+name: merge and concat
+description: Merge and concat smoke test
+steps:
+  merge:
+    left_source:
+      directory: merge_and_concat
+      extension: csv
+      use_run_id: false
+    "on": id
+    right_source:
+      directory: merge_and_concat
+      extension: csv
+      use_run_id: false
+    output:
+      file_name: merged
+  concatenate:
+    files:
+      - directory: merged
+        file_name: merged
+        extension: avro
+      - directory: merge_and_concat
+        file_name: concat_joined
+        extension: csv
+        use_run_id: false

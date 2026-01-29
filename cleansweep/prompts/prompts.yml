@@ -1,0 +1,63 @@
+---
+prompts:
+  - name: description
+    template: description.jinja2
+    variables:
+      - name: language
+        value: chunk_language
+      - name: article_title
+        value: title
+      - name: article
+        value: translated_chunk
+  - name: keywords
+    template: keywords.jinja2
+    variables:
+      - name: language
+        value: chunk_language
+      - name: article_title
+        value: title
+      - name: article
+        value: translated_chunk
+  - name: questions
+    template: questions.jinja2
+    variables:
+      - name: language
+        value: chunk_language
+      - name: article_title
+        value: title
+      - name: article
+        value: translated_chunk
+  - name: semantic_chunk
+    template: semantic_chunk.jinja2
+    variables:
+      - name: title
+        value: title
+      - name: article
+        value: content
+      - name: output_language
+        value: metadata_language
+  - name: merge_questions
+    template: merge_questions.jinja2
+    variables:
+      - name: qnas
+        value: qnas
+  - name: qna_validation
+    template: qna_validation.jinja2
+    variables:
+      - name: question
+        value: question
+      - name: answer
+        value: answer
+      - name: document
+        value: content
+      - name: id
+        value: question_id
+  - name: translation
+    template: translation.jinja2
+    variables:
+      - name: target_language
+        value: target_language
+      - name: source_language
+        value: source_language
+      - name: text
+        value: text

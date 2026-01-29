@@ -1,0 +1,71 @@
+{
+  "$defs": {
+    "Step": {
+      "properties": {
+        "name": { "title": "Name", "type": "string" },
+        "description": { "title": "Description", "type": "string" },
+        "command": { "title": "Command", "type": "string" },
+        "check_file": {
+          "default": true,
+          "title": "Check File",
+          "type": "boolean"
+        },
+        "target_dir": {
+          "anyOf": [{ "type": "string" }, { "type": "null" }],
+          "default": null,
+          "title": "Target Dir"
+        }
+      },
+      "required": ["name", "description", "command"],
+      "title": "Step",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "name": { "title": "Name", "type": "string" },
+    "description": { "title": "Description", "type": "string" },
+    "config": { "title": "Config", "type": "string" },
+    "data": {
+      "anyOf": [{ "type": "string" }, { "type": "null" }],
+      "default": null,
+      "title": "Data"
+    },
+    "target_bucket": {
+      "anyOf": [
+        { "enum": ["LANDING", "STAGING"], "type": "string" },
+        { "type": "null" }
+      ],
+      "default": null,
+      "title": "Target Bucket"
+    },
+    "target_directory": {
+      "anyOf": [{ "type": "string" }, { "type": "null" }],
+      "default": null,
+      "title": "Target Directory"
+    },
+    "mapping": {
+      "anyOf": [{ "type": "string" }, { "type": "null" }],
+      "default": null,
+      "title": "Mapping"
+    },
+    "plugin": {
+      "anyOf": [{ "type": "string" }, { "type": "null" }],
+      "default": null,
+      "title": "Plugin"
+    },
+    "steps": {
+      "items": { "$ref": "#/$defs/Step" },
+      "title": "Steps",
+      "type": "array"
+    },
+    "env_vars": {
+      "anyOf": [{ "type": "object" }, { "type": "null" }],
+      "default": null,
+      "title": "Env Vars",
+      "additionalProperties": true
+    }
+  },
+  "required": ["name", "description", "config", "steps"],
+  "title": "Test",
+  "type": "object"
+}

@@ -1,0 +1,112 @@
+[build-system]
+requires = [ "setuptools>=62.6", "wheel>=0.37.1",]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "GenAI-CleanSweep"
+description = "Components providing data cleansng and preparation for use in pipelines feeding LLMs."
+requires-python = ">=3.12.2,<3.13"
+dynamic = [ "version", "readme", "scripts",]
+dependencies = [
+    "azure-identity~=1.24.0",
+    "beautifulsoup4>=4.12.0,<5.0.0",
+    "black>=24.4.2,<26.0.0",
+    "cachetools>=5.3.3,<7.0.0",
+    "fastavro>=1.9.4,<2.0.0",
+    "google-cloud-logging>=3.10.0,<4.0.0",
+    "google-cloud-storage>=2.0.0,<4.0.0",
+    "great-expectations==0.18.22",
+    "html2text==2025.4.15",
+    "httpx==0.27.2",
+    "jinja2>=3.1.4,<4.0.0",
+    "jsonpath-ng>=1.6.1,<2.0.0",
+    "langchain==0.3.27",
+    "language-tool-python==2.8.0",
+    "maturin==1.9.3",
+    "networkx==3.5",
+    "nltk==3.9.1",
+    "openai==1.101.0",
+    "pandas>=2.2.2,<3.0.0",
+    "pluggy>=1.5.0,<2.0.0",
+    "pot==0.9.5",
+    "pyarrow>=16.0.0,<22.0.0",
+    "pycountry==24.6.1",
+    "pydantic-settings>=2.2.1,<3.0.0",
+    "pydantic>=2.7.1,<3.0.0",
+    "pytz==2025.2",
+    "pyyaml>=6.0.1,<7.0.0",
+    "scikit-learn==1.7.1",
+    "slack-sdk>=3.30.0,<4.0.0",
+    "spacy==3.8.7",
+    "textsearch==0.0.24",
+    "tiktoken==0.11.0",
+]
+[[project.authors]]
+name = "Sean Conkie"
+email = "sean.conkie@sky.uk"
+
+[tool.isort]
+profile = "black"
+
+[tool.pydocstyle]
+convention = "google"
+
+[tool.pylint]
+ignore = [ ".venv", "tests",]
+fail-under = 9.0
+
+[tool.ruff]
+extend-exclude = [ "tests", "notebooks", "config"]
+respect-gitignore = true
+line-length = 120
+indent-width = 4
+show-fixes = true
+unsafe-fixes = true
+target-version = "py312"
+
+[tool.pyright]
+include = [ "cleansweep", "app",]
+exclude = [ "tests", ".venv", "cleansweep/chunk/html.py", "cleansweep/chunk/jill.py", "config", "cleansweep/plugins",]
+venvPath = "."
+venv = ".venv"
+pythonVersion = "3.12"
+reportMissingImports = true
+reportMissingTypeStubs = false
+
+
+[tool.ruff.lint]
+select = [ "D", "E", "F", "I", "N", "W",]
+ignore = [ "D107", "D203", "D213", "D400", "D408", "D407", "D409", "D105",]
+
+[tool.setuptools.packages.find]
+where = [ ".",]
+
+[tool.setuptools.dynamic.version]
+attr = "cleansweep.__version__"
+
+[tool.setuptools.dynamic.readme]
+file = [ "README.md",]
+
+[tool.uv]
+dev-dependencies = [
+    "asyncmock>=0.4.2,<1.0.0",
+    "colorlog==6.8.2",
+    "coverage>=7.5.1,<8.0.0",
+    "freezegun>=1.5.0,<2.0.0",
+    "ipywidgets==8.1.3",
+    "pandas-stubs==2.2.2.240909",
+    "pdoc3>=0.10.0,<1.0.0",
+    "pymarkdownlnt>=0.9.17,<1.0.0",
+    "pyright>=1.1.362,<2.0.0",
+    "pytest-asyncio>=0.23.6,<1.0.0",
+    "pytest-cov>=6.1.1",
+    "pytest-html>=3.2.0,<4.0.0",
+    "pytest-mock>=3.11.1,<4.0.0",
+    "pytest-order>=1.2.0,<2.0.0",
+    "pytest>=8.0.0,<9.0.0",
+    "rich==13.7.1",
+    "ruff>=0.3.4,<1.0.0",
+    "yamllint>=1.26.1,<2.0.0",
+    "python-dotenv>=1.1.1",
+]
+

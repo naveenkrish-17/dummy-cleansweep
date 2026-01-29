@@ -1,0 +1,24 @@
+---
+schema:
+  content: "object"
+  title: "object"
+  id: "object"
+  length: "int64"
+  content_type: "object"
+  md5: "object"
+  metadata_region: "object"
+
+expectations:
+  - expectation: "expect_column_values_to_be_of_type"
+  - expectation: "expect_column_values_to_not_be_null"
+    exclude:
+      - metadata_region
+  - expectation: "expect_column_values_to_be_unique"
+    kwargs:
+      column: "id"
+  - expectation: "expect_column_values_to_be_unique"
+    kwargs:
+      column: "title"
+  - expectation: "expect_column_values_to_be_unique"
+    kwargs:
+      column: "md5"

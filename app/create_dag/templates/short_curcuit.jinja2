@@ -1,0 +1,7 @@
+
+    {{ name.replace('-','_') }} = ShortCircuitOperator(
+        task_id="{{ name }}",
+        dag=dag,
+        python_callable=check_file_exists,
+        op_args=["{{ bucket }}", "{{ match_glob }}"],
+    )

@@ -1,0 +1,26 @@
+---
+deployments:
+  gpt-4o:
+    - name: gpt-4o_2024-05-13
+      tpm: 1000000
+    - name: gpt-4o_2024-08-06
+      tpm: 1000000
+  gpt-3.5-turbo:
+    - name: "1106"
+      tpm: 300000
+  text-embedding-ada-002:
+    - name: text-embedding-ada-002
+      tpm: 350000
+      dimensions: 1536
+      accepts_dimensions: false
+  text-embedding-3-small:
+    - name: text-embedding-3-small
+      tpm: 350000
+      dimensions: 1536
+  text-embedding-3-large:
+    - name: text-embedding-3-large
+      tpm: 350000
+      dimensions: 3072
+  gpt-4o-mini:
+    - name: gpt-4o-mini_2024-07-18
+      tpm: 1000000

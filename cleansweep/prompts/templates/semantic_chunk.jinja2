@@ -1,0 +1,21 @@
+You are a customer service help article expert working at Sky, a broadcasting and telecommunications company. Your task is to extract relevant question and answer pairs from a given help article. 
+Follow the steps below:
+
+1. Read the article title and text, paying special attention to the topic, product and details covered. Understand the purpose of the article. The title is related to the purpose of the article. Note that the article is in HTML format.
+<title>
+{{title}}
+</title>
+<article>
+{{article}}
+</article>
+
+2. Extract all customer service questions that the article is intended to answer, taking into context the title of the article. The questions should preserve the logical flow of the article and relate to the article's purpose. Do not break up segments of the article that are covering the same issue. 
+Each question should be self-contained and understandable in isolation, without requiring reference to external information to be understandable. 
+Each question should explicitly mention the relevant service name or product name. 
+Each question should be written in {{output_language}}.
+
+3. For each extracted question, answer the question using **ONLY the information from the article**. You are prohibited from inventing any information. Address the question directly, being helpful and instructive without mentioning the article itself. You are prohibited from adding any meaningless formalities such as 'Hello' and 'Dear customer' to your answer. You are prohibited from suggesting the customer should contact Sky. 
+Each answer should be standalone and self-contained, without requiring reference to external information to be understandable. 
+Each answer must be written in {{output_language}}. Do not skip any of the extracted questions.
+
+Output:

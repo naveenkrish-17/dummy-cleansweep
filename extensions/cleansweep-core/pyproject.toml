@@ -1,0 +1,29 @@
+[build-system]
+requires = [
+    'maturin>=1,<2',
+    'typing-extensions >=4.6.0,!=4.7.0'
+]
+build-backend = 'maturin'
+
+[project]
+name = 'cleansweep_core'
+description = "Core rust extensions to improve the performance of CleanSweep."
+requires-python = '>=3.10'
+authors = [
+    {name = 'Sean Conkie', email = 'sean.conkie@sky.uk'}
+]
+dependencies = [
+    'typing-extensions >=4.6.0,!=4.7.0'
+]
+dynamic = [
+    'description',
+    'license',
+    'readme',
+    'version'
+]
+
+[tool.maturin]
+python-source = "python"
+module-name = "cleansweep_core._cleansweep_core"
+bindings = 'pyo3'
+features = ["pyo3/extension-module"]

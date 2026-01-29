@@ -1,0 +1,16 @@
+
+    {{ name.replace('-','_') }} = CloudRunExecuteJobOperator(
+        task_id="{{ name }}",
+        project_id=PROJECT_ID,
+        region=REGION,
+        job_name=JOB_NAME,
+        dag=dag,
+        overrides={
+            "container_overrides": [
+                {
+                    "args": ["-m", "app.{{ target|safe }}"],
+                    "env": {{ env }}
+                }
+            ]
+        },
+    )

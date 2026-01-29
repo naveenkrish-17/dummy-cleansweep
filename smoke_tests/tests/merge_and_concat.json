@@ -1,0 +1,27 @@
+{
+  "name": "merge and concat",
+  "description": "Test merge and concat",
+  "config": "merge_and_concat.yml",
+  "data": "merge",
+  "target_bucket": "STAGING",
+  "target_directory": "merge_and_concat",
+  "platform": "kosmo",
+  "steps": [
+    {
+      "name": "step 1",
+      "description": "Test a merge",
+      "command": "merge",
+      "check_file": true,
+      "target_dir": "merged",
+      "target_extension": "avro"
+    },
+    {
+      "name": "step 2",
+      "description": "Test a concatenation",
+      "command": "concatenate",
+      "check_file": true,
+      "target_dir": "concatenated",
+      "target_extension": "avro"
+    }
+  ]
+}

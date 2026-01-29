@@ -1,0 +1,19 @@
+---
+name: simple
+description: Simple smoke test
+steps:
+  clean:
+    rules:
+      - rule: filter out blank Articles
+        type: filter_by_column
+        column: length
+        operator: ">"
+        value: 0
+  metadata:
+    configs:
+      - output: description
+        prompt:
+          name: description
+      - output: keywords
+        prompt:
+          name: keywords

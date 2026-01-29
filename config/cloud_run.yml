@@ -1,0 +1,59 @@
+---
+apiVersion: run.googleapis.com/v1
+kind: Job
+metadata:
+  name: cleansweep-dev
+spec:
+  template:
+    metadata:
+      annotations:
+        run.googleapis.com/vpc-access-egress: all-traffic
+        run.googleapis.com/execution-environment: gen2
+        run.googleapis.com/vpc-access-connector: projects/grp-cec-kosmo-dev/locations/europe-west1/connectors/grp-cec-kosm-europe-west1
+    spec:
+      taskCount: 1
+      template:
+        spec:
+          containers:
+            - image: europe-west1-docker.pkg.dev/grp-cec-kosmo-dev/kosmo-dev-artifact-registry/cleansweep:latest
+              command: python
+              args:
+                - -m
+              env:
+                - name: env_name
+                  value: dev
+                - name: platform
+                  value: kosmo
+                - name: azure_client_id
+                  valueFrom:
+                    secretKeyRef:
+                      key: latest
+                      name: AZURE_CLIENT_ID
+                - name: azure_client_secret
+                  valueFrom:
+                    secretKeyRef:
+                      key: latest
+                      name: AZURE_CLIENT_SECRET
+                - name: azure_tenant_id
+                  valueFrom:
+                    secretKeyRef:
+                      key: latest
+                      name: AZURE_TENANT_ID
+                - name: slack_bot_token
+                  valueFrom:
+                    secretKeyRef:
+                      key: latest
+                      name: CLEANSWEEP_SLACK_BOT_TOKEN
+                - name: azure_scope
+                  value: api://032973cf-8723-49c8-8b43-98614afcee26/.default
+                - name: openai_api_base
+                  value: https://apim-openai6t1p642f.azure-api.net
+                - name: openai_api_version
+                  value: '2024-02-01'
+              resources:
+                limits:
+                  cpu: 4000m
+                  memory: 16Gi
+          maxRetries: 0
+          timeoutSeconds: '36000'
+          serviceAccountName: contentpipeline-etl-run@grp-cec-kosmo-dev.iam.gserviceaccount.com
